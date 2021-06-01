@@ -1,0 +1,15 @@
+.header {
+    background-color: violet;
+    height: 100px;
+    display: flex;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+.headerWraper {
+    padding-right: 30px;
+    padding-left: 30px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
