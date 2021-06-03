@@ -1,7 +1,7 @@
 import React from 'react';
 import { container } from './Container.module.css';
 
-const Container = children => {
+const Container = ({ children }) => {
     return <div className={container}>{children}</div>;
 };
 

@@ -1,6 +1,19 @@
-link {
-    color: blue;
+.list {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
-linkActive {
-    color: yellow;
+.link {
+    color: rgb(204, 204, 204);
+    font-size: 30px;
+    margin-left: 40px;
+    margin-right: 40px;
+}
+.linkActive {
+    color: rgb(62, 62, 255);
+    border-bottom: 0.5px solid rgb(62, 62, 255);
+}
+.link:hover {
+    font-weight: 400;
 }

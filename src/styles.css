@@ -1,3 +1,17 @@
+body {
+    background-color: rgb(10, 18, 29);
+    font-family: 'Kanit', sans-serif;
+}
+ul {
+    margin: 0;
+    padding: 0;
+}
 li {
     list-style: none;
+}
+a {
+    /* display: inline; */
+    text-decoration: none;
+    font-weight: 200;
+    color: rgb(204, 204, 204);
 }
