@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import SearchForm from '../../components/SearchForm';
 import MoviesList from '../../components/MoviesList';
-import ButtonReset from '../../components/ButtonReset';
+import Button from '../../components/Button';
+import { buttonReset } from '../../components/Button/Button.module.css';
 
 class MoviesPage extends Component {
     state = { searchMovies: [] };
@@ -31,9 +32,11 @@ class MoviesPage extends Component {
             <>
                 {!searchMovies.length && <SearchForm onSubmit={handleSubmit} />}
                 {searchMovies.length >= 1 && (
-                    <ButtonReset
+                    <Button
+                        type="button"
                         onClick={reset}
-                        title={'Search other movies'}
+                        title="Search other movies"
+                        className={buttonReset}
                     />
                 )}
 

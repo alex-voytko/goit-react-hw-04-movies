@@ -1,6 +1,15 @@
 body {
-    background-color: rgb(10, 18, 29);
     font-family: 'Kanit', sans-serif;
+    background-image: linear-gradient(
+            to top,
+            rgba(17, 33, 41, 0.9),
+            rgba(11, 18, 32, 0.8)
+        ),
+        url('./images/cinema.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    box-sizing: border-box;
 }
 ul {
     margin: 0;
@@ -19,4 +28,7 @@ h1,
 h2,
 p {
     margin: 0;
+}
+button {
+    border: none;
 }

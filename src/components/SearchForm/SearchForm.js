@@ -1,20 +1,21 @@
 import React, { Component } from 'react';
-import {
-    Form,
-    FormInput,
-    FormButton,
-    formContainer,
-} from './SearchForm.module.css';
+import { Form, FormInput, formContainer } from './SearchForm.module.css';
+import { FormButton } from '../Button/Button.module.css';
+import PropTypes from 'prop-types';
+import Button from '../Button';
 
 class SearchForm extends Component {
+    static propTypes = {
+        onSubmit: PropTypes.func.isRequired,
+    };
     state = { searchQuery: '' };
+
     handleInput = event => {
         this.setState({ searchQuery: event.target.value });
     };
     handleSubmit = event => {
         event.preventDefault();
         this.props.onSubmit(this.state);
-        // console.log(this.state);
         this.setState({ searchQuery: '' });
     };
     render() {
@@ -30,7 +31,7 @@ class SearchForm extends Component {
                             onChange={handleInput}
                             value={searchQuery}
                         />
-                        <button type="submit" className={FormButton}></button>
+                        <Button type="submit" title="" className={FormButton} />
                     </form>
                 </div>
             </>

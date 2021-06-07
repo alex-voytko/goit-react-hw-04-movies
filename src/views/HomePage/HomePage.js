@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { title, homPageContainer } from './HomePage.module.css';
 import MoviesList from '../../components/MoviesList';
-// import moviesApi from '../../services/movies-api';
 import axios from 'axios';
 
 class HomePage extends Component {

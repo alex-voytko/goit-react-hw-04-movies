@@ -1,7 +1,7 @@
 .contentText {
     color: rgb(204, 204, 204);
     font-weight: 200;
-    font-size: 15px;
+    font-size: 18px;
 }
 .tableContainer {
     margin-top: 30px;
@@ -16,19 +16,14 @@ th {
     letter-spacing: 2px;
     font-weight: 500;
     color: rgb(204, 204, 204);
-    background-color: accentColor;
 }
 td {
     font-size: 30px;
     text-align: center;
     padding: 7px;
-    color: lightTextColor;
-    background-color: rgb(17, 40, 56);
+    background-color: rgb(17, 40, 56, 70%);
+    /* opacity: 0.5; */
     letter-spacing: 2px;
-}
-
-td:hover {
-    background-color: rgb(9, 20, 29);
 }
 .loadingReviews {
     color: rgb(204, 204, 204);

@@ -16,7 +16,6 @@ class Cast extends Component {
     }
     render() {
         const { actors, isLoading } = this.state;
-        console.log(actors);
         return (
             <>
                 <div className={tableContainer}>

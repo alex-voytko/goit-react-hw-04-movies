@@ -1,27 +1,25 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 import axios from 'axios';
+import Button from '../../components/Button';
+import MovieDetails from '../../components/MovieDetails';
+import NavButtons from '../../components/NavButtons';
 import {
     title,
-    text,
-    navList,
     imageContainer,
     movieContainer,
     textContainer,
-    contentText,
-    descriptionList,
-    genreItem,
-    activeText,
 } from './MovieDetailsPage.module.css';
-import { Route, NavLink } from 'react-router-dom';
-import routes from '../routes';
-import Cast from '../../components/Cast';
-import Reviews from '../../components/Reviews';
+import { backBtn } from '../../components/Button/Button.module.css';
 
 class MovieDetailsPage extends Component {
     state = {
         original_title: '',
         genres: [],
         overview: '',
+        popularity: 0,
+        poster_path: '',
+        release_date: '',
     };
     async componentDidMount() {
         const { movieId } = this.props.match.params;
@@ -32,11 +30,30 @@ class MovieDetailsPage extends Component {
         );
         this.setState({ ...response.data });
     }
+    saveHistory = () => {
+        const { location, history } = this.props;
+        history.push(location.state.from);
+    };
     render() {
-        const { original_title, genres, overview, poster_path } = this.state;
+        const {
+            original_title,
+            genres,
+            overview,
+            poster_path,
+            popularity,
+            release_date,
+        } = this.state;
+        const { location } = this.props;
+        console.log(location);
         return (
             <>
                 <div className={movieContainer}>
+                    <Button
+                        onClick={this.saveHistory}
+                        title=""
+                        type="button"
+                        className={backBtn}
+                    />
                     <div className={imageContainer}>
                         <img
                             src={`https://image.tmdb.org/t/p/w200${poster_path}`}
@@ -45,46 +62,17 @@ class MovieDetailsPage extends Component {
                     </div>
                     <div className={textContainer}>
                         <h2 className={title}>{original_title}</h2>
-                        <ul className={descriptionList}>
-                            <li>
-                                <p className={text}>Genres:</p>
-
-                                {genres.map(genre => (
-                                    <p className={genreItem}>{genre.name} </p>
-                                ))}
-                            </li>
-                            <li>
-                                <p className={text}>Description:</p>
-                                <p className={contentText}>{overview}</p>
-                            </li>
-                        </ul>
-                        <ul className={navList}>
-                            <li>
-                                <NavLink
-                                    to={`${this.props.match.url}${routes.cast}`}
-                                    className={text}
-                                    activeClassName={activeText}
-                                >
-                                    Cast
-                                </NavLink>
-                            </li>
-                            <li>
-                                <NavLink
-                                    to={`${this.props.match.url}${routes.reviews}`}
-                                    className={text}
-                                    activeClassName={activeText}
-                                >
-                                    Reviews
-                                </NavLink>
-                            </li>
-                        </ul>
-                        <Route
-                            path={`${this.props.match.path}${routes.cast}`}
-                            component={Cast}
+                        <MovieDetails
+                            popularity={popularity}
+                            release={release_date}
+                            genres={genres}
+                            description={overview}
                         />
-                        <Route
-                            path={`${this.props.match.path}${routes.reviews}`}
-                            component={Reviews}
+                        <NavButtons
+                            castURL={`${this.props.match.url}/cast`}
+                            reviewsURL={`${this.props.match.url}/reviews`}
+                            castPath={`${this.props.match.path}/cast`}
+                            reviewsPath={`${this.props.match.path}/reviews`}
                         />
                     </div>
                 </div>
@@ -93,4 +81,4 @@ class MovieDetailsPage extends Component {
     }
 }
 
-export default MovieDetailsPage;
+export default withRouter(MovieDetailsPage);

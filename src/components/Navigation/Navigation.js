@@ -23,7 +23,7 @@ const Navigation = () => {
                         className={link}
                         activeClassName={linkActive}
                     >
-                        Search
+                        Movies
                     </NavLink>
                 </li>
             </ul>

@@ -1,0 +1,15 @@
+.text {
+    color: rgb(127, 177, 218);
+    display: block;
+    font-weight: 400;
+}
+.navList {
+    display: flex;
+    padding-top: 15px;
+}
+.navList a:first-child {
+    margin-right: 30px;
+}
+.activeText {
+    border-bottom: 2px solid rgb(127, 177, 218);
+}

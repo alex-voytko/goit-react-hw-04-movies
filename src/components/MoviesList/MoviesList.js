@@ -8,15 +8,24 @@ import {
     textContainer,
     contentContainer,
 } from './MoviesList.module.css';
-// import MovieDetailsPage from '../../views/MovieDetailsPage'
+import routes from '../../views/routes';
+import PropTypes from 'prop-types';
 
-const MoviesList = ({ movies, match }) => {
+const MoviesList = ({ movies, location }) => {
     return (
         <>
             <ul className={list}>
                 {movies.map(({ id, original_title, poster_path }) => (
                     <li key={id} className={movieItem}>
-                        <Link to={`${match.url}${id}`} className={movieLink}>
+                        <Link
+                            to={{
+                                pathname: `${routes.movies}${id}`,
+                                state: {
+                                    from: location,
+                                },
+                            }}
+                            className={movieLink}
+                        >
                             <div className={contentContainer}>
                                 <div className={imageContainer}>
                                     <img
@@ -34,6 +43,11 @@ const MoviesList = ({ movies, match }) => {
             </ul>
         </>
     );
+};
+
+MoviesList.propTypes = {
+    movies: PropTypes.arrayOf(PropTypes.object).isRequired,
+    location: PropTypes.object.isRequired,
 };
 
 export default withRouter(MoviesList);
