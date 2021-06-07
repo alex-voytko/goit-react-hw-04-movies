@@ -15,3 +15,8 @@ a {
     font-weight: 200;
     color: rgb(204, 204, 204);
 }
+h1,
+h2,
+p {
+    margin: 0;
+}

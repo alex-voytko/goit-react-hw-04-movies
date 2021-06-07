@@ -21,9 +21,17 @@ class App extends Component {
                 <Container>
                     <Switch>
                         <Route exact path={routes.home} component={HomePage} />
-                        <Route path={routes.movies} component={MoviesPage} />
+                        <Route
+                            exact
+                            path={routes.movies}
+                            component={MoviesPage}
+                        />
                         <Route
                             path={`${routes.movies}${routes.movieId}`}
+                            component={MovieDetailsPage}
+                        />
+                        <Route
+                            path={`${routes.home}${routes.movieId}`}
                             component={MovieDetailsPage}
                         />
                         {/* <Route component={HomePage} /> */}

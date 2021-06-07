@@ -1,5 +1,10 @@
 import React, { Component } from 'react';
-import { Form, FormInput, FormButton } from './SearchForm.module.css';
+import {
+    Form,
+    FormInput,
+    FormButton,
+    formContainer,
+} from './SearchForm.module.css';
 
 class SearchForm extends Component {
     state = { searchQuery: '' };
@@ -17,15 +22,17 @@ class SearchForm extends Component {
         const { searchQuery } = this.state;
         return (
             <>
-                <form className={Form} onSubmit={handleSubmit}>
-                    <input
-                        className={FormInput}
-                        placeholder="Search movies"
-                        onChange={handleInput}
-                        value={searchQuery}
-                    />
-                    <button type="submit" className={FormButton}></button>
-                </form>
+                <div className={formContainer}>
+                    <form className={Form} onSubmit={handleSubmit}>
+                        <input
+                            className={FormInput}
+                            placeholder="Search movies"
+                            onChange={handleInput}
+                            value={searchQuery}
+                        />
+                        <button type="submit" className={FormButton}></button>
+                    </form>
+                </div>
             </>
         );
     }

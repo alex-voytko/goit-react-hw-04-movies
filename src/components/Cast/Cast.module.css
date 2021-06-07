@@ -1,0 +1,41 @@
+.contentText {
+    color: rgb(204, 204, 204);
+    font-weight: 200;
+    font-size: 15px;
+}
+.tableContainer {
+    margin-top: 30px;
+    padding-bottom: 50px;
+}
+table {
+    width: 500px;
+}
+th {
+    padding: 20px;
+    font-size: 20px;
+    letter-spacing: 2px;
+    font-weight: 500;
+    color: rgb(204, 204, 204);
+    background-color: accentColor;
+}
+td {
+    font-size: 30px;
+    text-align: center;
+    padding: 7px;
+    color: lightTextColor;
+    background-color: rgb(17, 40, 56);
+    letter-spacing: 2px;
+}
+
+td:hover {
+    background-color: rgb(9, 20, 29);
+}
+.loadingReviews {
+    color: rgb(204, 204, 204);
+    font-style: italic;
+    font-weight: 200;
+}
+td > img {
+    width: 100px;
+    height: 150px;
+}

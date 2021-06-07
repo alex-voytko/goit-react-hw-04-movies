@@ -21,6 +21,7 @@ const MoviesList = ({ movies, match }) => {
                                 <div className={imageContainer}>
                                     <img
                                         src={`https://image.tmdb.org/t/p/w200${poster_path}`}
+                                        alt="movie-poster"
                                     />
                                 </div>
                                 <div className={textContainer}>

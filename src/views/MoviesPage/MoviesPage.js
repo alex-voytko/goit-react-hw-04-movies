@@ -27,7 +27,6 @@ class MoviesPage extends Component {
     render() {
         const { handleSubmit, reset } = this;
         const { searchMovies } = this.state;
-        // const { url } = this.props.match;
         return (
             <>
                 {!searchMovies.length && <SearchForm onSubmit={handleSubmit} />}

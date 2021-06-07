@@ -1,0 +1,25 @@
+.reviewsContainer {
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+.text {
+    color: rgb(204, 204, 204);
+    display: block;
+    font-weight: 400;
+    font-size: 16px;
+}
+.contentText {
+    display: inline;
+    color: rgb(204, 204, 204);
+    font-weight: 200;
+    font-size: 15px;
+    font-style: italic;
+}
+.item:nth-child(n + 2) {
+    margin-top: 14px;
+}
+.loadingReviews {
+    color: rgb(204, 204, 204);
+    font-style: italic;
+    font-weight: 200;
+}

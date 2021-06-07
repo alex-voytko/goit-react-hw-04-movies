@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { title } from './HomePage.module.css';
+import { title, homPageContainer } from './HomePage.module.css';
 import MoviesList from '../../components/MoviesList';
 // import moviesApi from '../../services/movies-api';
 import axios from 'axios';
@@ -21,8 +21,10 @@ class HomePage extends Component {
         const { trendMovies } = this.state;
         return (
             <>
-                <h1 className={title}>Week Trends</h1>
-                <MoviesList movies={trendMovies} />
+                <div className={homPageContainer}>
+                    <h1 className={title}>Week Trends</h1>
+                    <MoviesList movies={trendMovies} />
+                </div>
             </>
         );
     }
