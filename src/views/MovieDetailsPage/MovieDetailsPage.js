@@ -56,17 +56,17 @@ class MovieDetailsPage extends Component {
         console.log(match.url);
         return (
             <>
+                {isLoading && (
+                    <div className={loader}>
+                        <Loader
+                            type="Oval"
+                            color="#FFFFFF"
+                            height={40}
+                            width={40}
+                        />
+                    </div>
+                )}
                 <div className={movieContainer}>
-                    {isLoading && (
-                        <div className={loader}>
-                            <Loader
-                                type="Oval"
-                                color="#FFFFFF"
-                                height={40}
-                                width={40}
-                            />
-                        </div>
-                    )}
                     <Button
                         onClick={this.saveHistory}
                         title=""
