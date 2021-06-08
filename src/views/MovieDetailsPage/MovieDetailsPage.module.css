@@ -19,9 +19,24 @@
     width: 600px;
     margin-left: 50px;
 }
-.title {
+.titleMovie {
     margin-bottom: 15px;
     font-size: 25px;
     font-weight: 500;
     color: rgb(204, 204, 204);
+}
+.text {
+    color: rgb(127, 177, 218);
+    display: block;
+    font-weight: 400;
+}
+.navList {
+    display: flex;
+    padding-top: 15px;
+}
+.navList a:first-child {
+    margin-right: 30px;
+}
+.activeText {
+    border-bottom: 2px solid rgb(127, 177, 218);
 }

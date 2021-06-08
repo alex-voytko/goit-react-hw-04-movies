@@ -1,25 +1,21 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 import SearchForm from '../../components/SearchForm';
 import MoviesList from '../../components/MoviesList';
 import Button from '../../components/Button';
 import { buttonReset } from '../../components/Button/Button.module.css';
+import MoviesAPI from '../../services/movies-api';
 
 class MoviesPage extends Component {
-    state = { searchMovies: [] };
+    state = { searchMovies: [], error: null };
 
     handleSubmit = ({ searchQuery }) => {
-        const url = 'https://api.themoviedb.org/3';
-        const key = 'ace0f6585130b92065e469ed2fee0a01';
-        axios
-            .get(
-                `${url}/search/movie?api_key=${key}&language=en-US&query=${searchQuery}&page=1&include_adult=false`,
-            )
-            .then(response => {
+        MoviesAPI.searchMovies(searchQuery)
+            .then(response =>
                 this.setState({
-                    searchMovies: response.data.results,
-                });
-            });
+                    searchMovies: response,
+                }),
+            )
+            .catch(error => this.setState({ error: error }));
     };
     reset = () => {
         this.setState({ searchMovies: [] });

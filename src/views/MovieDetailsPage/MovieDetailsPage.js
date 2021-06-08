@@ -1,53 +1,72 @@
 import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
-import axios from 'axios';
+import { Route, NavLink, Switch, withRouter } from 'react-router-dom';
 import Button from '../../components/Button';
 import MovieDetails from '../../components/MovieDetails';
-import NavButtons from '../../components/NavButtons';
+import Cast from '../../components/Cast';
+import Reviews from '../../components/Reviews';
 import {
-    title,
+    titleMovie,
     imageContainer,
     movieContainer,
     textContainer,
+    navList,
+    text,
+    activeText,
 } from './MovieDetailsPage.module.css';
 import { backBtn } from '../../components/Button/Button.module.css';
+import routes from '../routes';
+import MoviesAPI from '../../services/movies-api';
+import Loader from 'react-loader-spinner';
+import { loader } from '../../Loader.module.css';
 
 class MovieDetailsPage extends Component {
     state = {
-        original_title: '',
+        title: '',
         genres: [],
         overview: '',
         popularity: 0,
         poster_path: '',
         release_date: '',
+        error: null,
+        isLoading: false,
     };
-    async componentDidMount() {
+    componentDidMount() {
+        this.setState({ isLoading: true });
         const { movieId } = this.props.match.params;
-        const key = 'ace0f6585130b92065e469ed2fee0a01';
-        const url = 'https://api.themoviedb.org/3';
-        const response = await axios.get(
-            `${url}/movie/${movieId}?api_key=${key}&language=en-US`,
-        );
-        this.setState({ ...response.data });
+        MoviesAPI.fetchMovieDetails(movieId)
+            .then(response => this.setState({ ...response }))
+            .catch(error => this.setState({ error: error }))
+            .finally(() => this.setState({ isLoading: false }));
     }
     saveHistory = () => {
         const { location, history } = this.props;
-        history.push(location.state.from);
+        history.push(location?.state?.from || routes.home);
     };
     render() {
         const {
-            original_title,
+            title,
             genres,
             overview,
             poster_path,
             popularity,
             release_date,
+            isLoading,
         } = this.state;
-        const { location } = this.props;
-        console.log(location);
+        const { location, match } = this.props;
+        console.log(match.url);
         return (
             <>
                 <div className={movieContainer}>
+                    {isLoading && (
+                        <div className={loader}>
+                            <Loader
+                                type="Oval"
+                                color="#FFFFFF"
+                                height={40}
+                                width={40}
+                            />
+                        </div>
+                    )}
                     <Button
                         onClick={this.saveHistory}
                         title=""
@@ -61,24 +80,53 @@ class MovieDetailsPage extends Component {
                         />
                     </div>
                     <div className={textContainer}>
-                        <h2 className={title}>{original_title}</h2>
+                        <h2 className={titleMovie}>{title}</h2>
                         <MovieDetails
                             popularity={popularity}
                             release={release_date}
                             genres={genres}
                             description={overview}
                         />
-                        <NavButtons
-                            castURL={`${this.props.match.url}/cast`}
-                            reviewsURL={`${this.props.match.url}/reviews`}
-                            castPath={`${this.props.match.path}/cast`}
-                            reviewsPath={`${this.props.match.path}/reviews`}
-                        />
+                        <ul className={navList}>
+                            <li>
+                                <NavLink
+                                    to={{
+                                        pathname: `${match.url}/cast`,
+                                        state: { from: location.state.from },
+                                    }}
+                                    className={text}
+                                    activeClassName={activeText}
+                                >
+                                    Cast
+                                </NavLink>
+                            </li>
+                            <li>
+                                <NavLink
+                                    to={{
+                                        pathname: `${match.url}/reviews`,
+                                        state: { from: location.state.from },
+                                    }}
+                                    className={text}
+                                    activeClassName={activeText}
+                                >
+                                    Reviews
+                                </NavLink>
+                            </li>
+                        </ul>
+                        <Switch>
+                            <Route
+                                path={`${match.path}/cast`}
+                                component={Cast}
+                            />
+                            <Route
+                                path={`${match.path}/reviews`}
+                                component={Reviews}
+                            />
+                        </Switch>
                     </div>
                 </div>
             </>
         );
     }
 }
-
 export default withRouter(MovieDetailsPage);

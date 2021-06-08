@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 import {
     reviewsContainer,
     text,
@@ -7,21 +6,19 @@ import {
     item,
     loadingReviews,
 } from './Reviews.module.css';
+import MoviesAPI from '../../services/movies-api';
+import Loader from 'react-loader-spinner';
+import { loader } from '../../Loader.module.css';
 
 class Reviews extends Component {
-    state = { reviews: [], isLoading: false };
-    async componentDidMount() {
+    state = { reviews: [], isLoading: false, error: null };
+    componentDidMount() {
         this.setState({ isLoading: true });
         const { movieId } = this.props.match.params;
-        const key = 'ace0f6585130b92065e469ed2fee0a01';
-        const url = 'https://api.themoviedb.org/3';
-        const response = await axios.get(
-            `${url}/movie/${movieId}/reviews?api_key=${key}&language=en-US&page=1`,
-        );
-        this.setState({
-            reviews: [...response.data.results],
-            isLoading: false,
-        });
+        MoviesAPI.loadMovieReviews(movieId)
+            .then(response => this.setState({ reviews: [...response] }))
+            .catch(error => this.setState({ error: error }))
+            .finally(() => this.setState({ isLoading: false }));
     }
     render() {
         console.log(this.state.reviews);
@@ -30,7 +27,14 @@ class Reviews extends Component {
             <>
                 <div className={reviewsContainer}>
                     {isLoading && (
-                        <p className={loadingReviews}>Load reviews...</p>
+                        <div className={loader}>
+                            <Loader
+                                type="Oval"
+                                color="#FFFFFF"
+                                height={32}
+                                width={32}
+                            />
+                        </div>
                     )}
                     {!isLoading && (
                         <ul>

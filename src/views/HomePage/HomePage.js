@@ -1,23 +1,21 @@
 import React, { Component } from 'react';
 import { title, homPageContainer } from './HomePage.module.css';
 import MoviesList from '../../components/MoviesList';
-import axios from 'axios';
+import MoviesAPI from '../../services/movies-api';
 
 class HomePage extends Component {
     state = {
         trendMovies: [],
+        error: null,
     };
     componentDidMount() {
-        const key = 'ace0f6585130b92065e469ed2fee0a01';
-        const url = 'https://api.themoviedb.org/3';
-        axios
-            .get(`${url}/trending/movie/week?api_key=${key}`)
-            .then(response =>
-                this.setState({ trendMovies: response.data.results }),
-            );
+        MoviesAPI.showWeekTrends()
+            .then(response => this.setState({ trendMovies: response }))
+            .catch(error => this.setState({ error: error }));
     }
     render() {
         const { trendMovies } = this.state;
+        console.log(trendMovies);
         return (
             <>
                 <div className={homPageContainer}>

@@ -1,18 +1,18 @@
 import React, { Component } from 'react';
-import { contentText, tableContainer, loadingReviews } from './Cast.module.css';
-import axios from 'axios';
+import { contentText, tableContainer } from './Cast.module.css';
+import MoviesAPI from '../../services/movies-api';
+import Loader from 'react-loader-spinner';
+import { loader } from '../../Loader.module.css';
 
 class Cast extends Component {
-    state = { actors: [], isLoading: false };
-    async componentDidMount() {
+    state = { actors: [], isLoading: false, error: null };
+    componentDidMount() {
         this.setState({ isLoading: true });
         const { movieId } = this.props.match.params;
-        const key = 'ace0f6585130b92065e469ed2fee0a01';
-        const url = 'https://api.themoviedb.org/3';
-        const response = await axios.get(
-            `${url}/movie/${movieId}/credits?api_key=${key}&language=en-US`,
-        );
-        this.setState({ actors: response.data.cast, isLoading: false });
+        MoviesAPI.loadMovieCast(movieId)
+            .then(response => this.setState({ actors: response }))
+            .catch(error => this.setState({ error: error }))
+            .finally(() => this.setState({ isLoading: false }));
     }
     render() {
         const { actors, isLoading } = this.state;
@@ -20,7 +20,14 @@ class Cast extends Component {
             <>
                 <div className={tableContainer}>
                     {isLoading && (
-                        <p className={loadingReviews}>Load Actors...</p>
+                        <div className={loader}>
+                            <Loader
+                                type="Oval"
+                                color="#FFFFFF"
+                                height={32}
+                                width={32}
+                            />
+                        </div>
                     )}
                     <table>
                         <thead>
@@ -42,7 +49,7 @@ class Cast extends Component {
                                     <td className={contentText}>
                                         <img
                                             src={`https://image.tmdb.org/t/p/w200${actor.profile_path}`}
-                                            alt="actor's photo"
+                                            alt="actor"
                                         />
                                     </td>
                                 </tr>
