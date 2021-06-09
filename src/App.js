@@ -4,8 +4,7 @@ import Container from './components/Container';
 import Navigation from './components/Navigation';
 import Header from './components/Header';
 import routes from './views/routes';
-import Loader from 'react-loader-spinner';
-import { loader } from './Loader.module.css';
+import Spinner from './components/Loader';
 
 const HomePage = lazy(() =>
     import('./views/HomePage' /* webpackChunkName: "home-page" */),
@@ -25,18 +24,7 @@ const App = () => (
             <Navigation />
         </Header>
         <Container>
-            <Suspense
-                fallback={
-                    <div className={loader}>
-                        <Loader
-                            type="Oval"
-                            color="#FFFFFF"
-                            height={50}
-                            width={50}
-                        />
-                    </div>
-                }
-            >
+            <Suspense fallback={<Spinner size="60" />}>
                 <Switch>
                     <Route exact path={routes.home} component={HomePage} />
                     <Route exact path={routes.movies} component={MoviesPage} />

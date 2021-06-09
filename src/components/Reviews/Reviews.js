@@ -7,8 +7,7 @@ import {
     loadingReviews,
 } from './Reviews.module.css';
 import MoviesAPI from '../../services/movies-api';
-import Loader from 'react-loader-spinner';
-import { loader } from '../../Loader.module.css';
+import Spinner from '../Loader';
 
 class Reviews extends Component {
     state = { reviews: [], isLoading: false, error: null };
@@ -26,16 +25,7 @@ class Reviews extends Component {
         return (
             <>
                 <div className={reviewsContainer}>
-                    {isLoading && (
-                        <div className={loader}>
-                            <Loader
-                                type="Oval"
-                                color="#FFFFFF"
-                                height={32}
-                                width={32}
-                            />
-                        </div>
-                    )}
+                    {isLoading && <Spinner size="32" />}
                     {!isLoading && (
                         <ul>
                             {reviews.map(review => (

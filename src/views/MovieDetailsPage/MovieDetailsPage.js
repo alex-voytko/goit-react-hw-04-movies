@@ -16,8 +16,7 @@ import {
 import { backBtn } from '../../components/Button/Button.module.css';
 import routes from '../routes';
 import MoviesAPI from '../../services/movies-api';
-import Loader from 'react-loader-spinner';
-import { loader } from '../../Loader.module.css';
+import Spinner from '../../components/Loader';
 
 class MovieDetailsPage extends Component {
     state = {
@@ -56,16 +55,7 @@ class MovieDetailsPage extends Component {
         console.log(match.url);
         return (
             <>
-                {isLoading && (
-                    <div className={loader}>
-                        <Loader
-                            type="Oval"
-                            color="#FFFFFF"
-                            height={40}
-                            width={40}
-                        />
-                    </div>
-                )}
+                {isLoading && <Spinner size="48" />}
                 <div className={movieContainer}>
                     <Button
                         onClick={this.saveHistory}

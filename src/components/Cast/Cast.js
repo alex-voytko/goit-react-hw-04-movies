@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { contentText, tableContainer } from './Cast.module.css';
 import MoviesAPI from '../../services/movies-api';
-import Loader from 'react-loader-spinner';
-import { loader } from '../../Loader.module.css';
+import Spinner from '../Loader';
 
 class Cast extends Component {
     state = { actors: [], isLoading: false, error: null };
@@ -19,16 +18,7 @@ class Cast extends Component {
         return (
             <>
                 <div className={tableContainer}>
-                    {isLoading && (
-                        <div className={loader}>
-                            <Loader
-                                type="Oval"
-                                color="#FFFFFF"
-                                height={32}
-                                width={32}
-                            />
-                        </div>
-                    )}
+                    {isLoading && <Spinner size="32" />}
                     <table>
                         <thead>
                             <tr>
