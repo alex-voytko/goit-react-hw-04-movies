@@ -1,0 +1,12 @@
+.title {
+    margin-bottom: 15px;
+    font-size: 25px;
+    font-weight: 500;
+    color: rgb(204, 204, 204);
+}
+.titleContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 30px;
+}

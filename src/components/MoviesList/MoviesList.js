@@ -15,7 +15,7 @@ const MoviesList = ({ movies, location }) => {
     return (
         <>
             <ul className={list}>
-                {movies.map(({ id, original_title, poster_path }) => (
+                {movies.map(({ id, title, poster_path }) => (
                     <li key={id} className={movieItem}>
                         <Link
                             to={{
@@ -33,9 +33,7 @@ const MoviesList = ({ movies, location }) => {
                                         alt="movie-poster"
                                     />
                                 </div>
-                                <div className={textContainer}>
-                                    {original_title}
-                                </div>
+                                <div className={textContainer}>{title}</div>
                             </div>
                         </Link>
                     </li>
